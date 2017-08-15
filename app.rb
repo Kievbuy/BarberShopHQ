@@ -8,11 +8,54 @@ set :database, 'sqlite3:barbershop.db'
 class Client < ActiveRecord::Base
 end
 
-class Barber <ActiveRecord::Base
+class Barber < ActiveRecord::Base
 end
 
-get '/' do
+class Contact < ActiveRecord::Base
+end
 
-  @barbers = Barber.order 'created_at DESC'
+before do
+  @barbers = Barber.all
+end
+
+
+# === GET ===
+
+get '/' do
   erb :index
+end
+
+get '/visit' do
+  erb :visit
+end
+
+get '/contacts' do
+  erb :contacts
+end
+
+
+
+# === POST ===
+
+post '/visit' do
+
+  @username = params[:username]
+  @phone = params[:phone]
+  @datetime = params[:date_time]
+  @barber = params[:barber]
+  @color = params[:color]
+
+
+  erb "<h2>Спасибо. Вы записались.</h2>"
+end
+
+post '/contacts' do
+  name = params[:name]
+  phone = params[:phone]
+  email = params[:email]
+  message = params[:message]
+
+  Contact.create(name: name, phone: phone, email: email, message: message)
+
+  erb "<h2>Спасибо. Мы свяжемся с вами в ближайшее время.</h2>"
 end
