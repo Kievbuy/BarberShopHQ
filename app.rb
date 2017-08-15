@@ -13,6 +13,6 @@ end
 
 get '/' do
 
-  @barbers = Barber.all
+  @barbers = Barber.order 'created_at DESC'
   erb :index
 end
