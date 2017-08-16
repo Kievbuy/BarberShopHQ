@@ -1,0 +1,17 @@
+<h1>List of clients</h1>
+
+<br>
+<table class="table table-striped">
+  <tr>
+    <th>Booked time</th>
+    <th>Name</th>
+    <th>Phone</th>
+  </tr>
+  <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.datestamp %></td>
+        <td><a href="/client/<%= client.id %>"><%= client.name %></a></td>
+        <td><%= client.phone %></td>
+      </tr>
+  <% end %>
+</table>
